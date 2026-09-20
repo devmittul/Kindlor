@@ -1,0 +1,24 @@
+---
+import SectionHeader from '../ui/SectionHeader.astro';
+import FounderCard from '../ui/FounderCard.astro';
+import { FOUNDERS } from '../../data/foundersData';
+
+const mittul = FOUNDERS.find((f) => f.name === 'MITTUL')!;
+const arshmeen = FOUNDERS.find((f) => f.name === 'ARSHMEEN')!;
+---
+
+<section class="py-24 px-4 sm:px-8 lg:px-12 border-b border-[var(--color-hairline)] bg-[var(--color-canvas)]" id="the-founders">
+  <div class="max-w-[1280px] mx-auto space-y-12">
+    <SectionHeader
+      number="05"
+      eyebrow="THE FOUNDERS"
+      title="DESIGN THAT LOOKS DISTINCTIVE. ENGINEERING THAT WORKS BEHIND IT."
+    />
+
+    <!-- Founders Grid -->
+    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 pt-4">
+      <FounderCard founder={arshmeen} />
+      <FounderCard founder={mittul} />
+    </div>
+  </div>
+</section>

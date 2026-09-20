@@ -1,0 +1,144 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import FinalCTA from '../components/sections/FinalCTA.astro';
+
+interface Props {
+  title: string;
+  year: number;
+  industry: string;
+  summary: string;
+  services: string[];
+  technologies: string[];
+  heroImage: string;
+  metrics?: { label: string; value: string }[];
+  gallery?: string[];
+}
+
+const {
+  title,
+  year,
+  industry,
+  summary,
+  services,
+  technologies,
+  heroImage,
+  metrics,
+  gallery,
+} = Astro.props;
+
+const caseStudySchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  'name': `${title} Case Study`,
+  'headline': title,
+  'description': summary,
+  'image': heroImage,
+  'dateCreated': year.toString(),
+  'genre': industry,
+  'creator': {
+    '@type': 'Organization',
+    'name': 'Kindlor',
+  },
+  'keywords': [...services, ...technologies].join(', '),
+};
+---
+
+<BaseLayout title={`${title} — Kindlor Case Study`} description={summary}>
+  <script type="application/ld+json" set:html={JSON.stringify(caseStudySchema)} slot="head" />
+  
+  <article class="max-w-6xl mx-auto px-4 sm:px-12 lg:px-24 py-10 sm:py-16 space-y-10 sm:space-y-12">
+    <!-- Header Section -->
+    <header class="space-y-5 sm:space-y-6 border-b border-white/10 pb-6 sm:pb-8">
+      <div class="flex items-center space-x-3 text-xs font-mono text-[#5b5b68] tracking-widest">
+        <span>CASE STUDY</span>
+        <span class="w-6 h-[1px] bg-white/20"></span>
+        <span class="text-[#888898] uppercase">{industry}</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-6xl font-syne font-extrabold tracking-tight text-white uppercase break-words">
+        {title}
+      </h1>
+
+      <p class="text-sm sm:text-lg text-[#9ea0af] max-w-3xl leading-relaxed font-sans">
+        {summary}
+      </p>
+
+      <!-- Specs Sidebar Row -->
+      <div class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 pt-6 border-t border-white/5 font-mono text-xs uppercase">
+        <div>
+          <span class="text-[#5a5a69] block mb-1 text-[10px]">YEAR:</span>
+          <span class="text-white font-semibold">{year}</span>
+        </div>
+        <div>
+          <span class="text-[#5a5a69] block mb-1 text-[10px]">INDUSTRY:</span>
+          <span class="text-white font-semibold">{industry}</span>
+        </div>
+        <div>
+          <span class="text-[#5a5a69] block mb-1 text-[10px]">SERVICES:</span>
+          <div class="text-emerald-400 font-semibold break-words">
+            {services.join(', ')}
+          </div>
+        </div>
+        <div>
+          <span class="text-[#5a5a69] block mb-1 text-[10px]">STACK:</span>
+          <div class="text-[#a0a0b0] font-semibold break-words">
+            {technologies.join(', ')}
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Hero Visual -->
+    <div class="w-full rounded-lg overflow-hidden border border-white/10 glass-panel">
+      <img
+        src={heroImage}
+        alt={`${title} main case study visual`}
+        loading="eager"
+        decoding="async"
+        class="w-full h-auto max-h-[600px] object-cover"
+      />
+    </div>
+
+    <!-- Impact Metrics Cards -->
+    {metrics && metrics.length > 0 && (
+      <section class="space-y-4">
+        <span class="font-mono text-xs text-emerald-400 uppercase tracking-widest block">
+          KEY PROJECT METRICS:
+        </span>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+          {metrics.map((m) => (
+            <div class="glass-panel p-5 sm:p-6 border border-white/10 rounded-lg space-y-2">
+              <span class="text-2xl sm:text-4xl font-extrabold text-white font-syne">
+                {m.value}
+              </span>
+              <span class="block text-[10px] sm:text-xs font-mono text-[#78788a] uppercase">
+                {m.label}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- MDX Content Body -->
+    <div class="prose prose-invert prose-base sm:prose-lg max-w-4xl text-[#9ea0af] leading-relaxed space-y-6">
+      <slot />
+    </div>
+
+    <!-- Gallery Grid -->
+    {gallery && gallery.length > 0 && (
+      <section class="space-y-6 pt-8 border-t border-white/10">
+        <div class="text-xs font-mono text-[#888898] uppercase tracking-widest">VISUAL SYSTEM GALLERY</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          {gallery.map((img, i) => (
+            <div class="border border-white/10 overflow-hidden rounded-lg glass-panel">
+              <img src={img} alt={`${title} screenshot ${i+1}`} loading="lazy" decoding="async" class="w-full h-auto object-cover" />
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+  </article>
+
+  <FinalCTA />
+</BaseLayout>

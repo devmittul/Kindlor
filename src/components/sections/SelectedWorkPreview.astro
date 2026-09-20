@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeader from '../ui/SectionHeader.astro';
+import ProjectCard from '../ui/ProjectCard.astro';
+
+const allProjects = await getCollection('projects');
+const sortedProjects = allProjects.sort((a, b) => (a.data.order || 1) - (b.data.order || 1));
+const previewProjects = sortedProjects.slice(0, 2);
+---
+
+<section class="py-24 px-4 sm:px-8 lg:px-12 border-b border-[var(--color-hairline)] bg-[var(--color-canvas)]" id="selected-work">
+  <div class="max-w-[1280px] mx-auto space-y-12">
+    <!-- Section Header -->
+    <div class="border-b border-[var(--color-hairline-strong)] pb-6">
+      <SectionHeader
+        number="03"
+        eyebrow="PORTFOLIO"
+        title="REAL PROJECTS. REAL DIGITAL PRESENCES."
+      />
+    </div>
+
+    <!-- Project Cards Grid -->
+    <div class="flex overflow-x-auto snap-x snap-mandatory pb-6 gap-6 sm:gap-8 md:grid md:grid-cols-2 md:overflow-visible [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+      {previewProjects.map((project, idx) => (
+        <ProjectCard
+          project={project}
+          index={idx}
+          variant="preview"
+          class="snap-start shrink-0 w-[85vw] md:w-auto"
+        />
+      ))}
+    </div>
+
+    <!-- See More CTA -->
+    <div class="flex justify-center pt-8">
+      <a class="px-8 py-4 bg-transparent text-[var(--color-ink)] border border-[var(--color-hairline-strong)] font-sans text-[14px] font-semibold rounded-md hover:border-[var(--color-ink)] transition-colors flex items-center space-x-2" href="/work">
+        <span>VIEW MORE PROJECTS</span>
+        <span>→</span>
+      </a>
+    </div>
+  </div>
+</section>

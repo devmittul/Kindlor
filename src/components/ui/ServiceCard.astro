@@ -1,0 +1,97 @@
+---
+import type { DetailedService } from '../../data/servicesData';
+
+interface Props {
+  service?: DetailedService;
+  number?: string;
+  title?: string;
+  description?: string;
+  icon?: string;
+  variant?: 'preview' | 'full';
+  class?: string;
+}
+
+const {
+  service,
+  number = service?.number,
+  title = service?.category || service?.headline,
+  description = service?.copy || service?.copy,
+  icon,
+  variant = 'preview',
+  class: className = '',
+} = Astro.props;
+---
+
+{variant === 'preview' ? (
+  <div class={`bg-[var(--color-surface-card)] p-6 sm:p-8 rounded-xl border border-[var(--color-hairline)] flex flex-col group ${className}`}>
+    <div class="flex items-center justify-between text-[12px] font-mono text-[var(--color-muted)] mb-4">
+      {number && <span class="font-bold">0{number}</span>}
+      {icon && <span class="text-lg">{icon}</span>}
+    </div>
+    <h3 class="text-xl font-sans font-bold text-[var(--color-ink)] tracking-tight mb-3">
+      {title}
+    </h3>
+    <p class="text-[14px] sm:text-[16px] text-[var(--color-muted)] leading-relaxed font-sans">
+      {description}
+    </p>
+  </div>
+) : (
+  <article class={`bg-[var(--color-surface-card)] p-6 sm:p-10 rounded-xl border border-[var(--color-hairline)] space-y-6 ${className}`}>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[var(--color-hairline-strong)] pb-4 gap-2">
+      <span class="text-[12px] font-mono text-[var(--color-ink)] font-bold tracking-widest">
+        SERVICE {service?.number} // {service?.category}
+      </span>
+      <span class="text-[10px] font-mono text-[var(--color-muted-soft)] uppercase">KINDLOR SYSTEM</span>
+    </div>
+
+    <h2 class="text-2xl sm:text-4xl font-sans font-bold text-[var(--color-ink)] tracking-tight">
+      {service?.headline}
+    </h2>
+
+    <p class="text-[16px] md:text-[18px] text-[var(--color-body)] font-sans leading-relaxed max-w-3xl">
+      {service?.copy}
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-[var(--color-hairline-strong)]">
+      {service?.suitableFor && service.suitableFor.length > 0 && (
+        <div class="space-y-2">
+          <span class="text-[10px] font-mono text-[var(--color-muted-soft)] uppercase tracking-wider block">SUITABLE FOR:</span>
+          <ul class="flex flex-wrap gap-2">
+            {service.suitableFor.map((item) => (
+              <li class="text-[12px] font-sans px-3 py-1 rounded-full bg-[var(--color-canvas)] border border-[var(--color-hairline)] text-[var(--color-muted)]">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {service?.includes && service.includes.length > 0 && (
+        <div class="space-y-2">
+          <span class="text-[10px] font-mono text-[var(--color-muted-soft)] uppercase tracking-wider block">INCLUDES:</span>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[12px] font-mono text-[var(--color-muted)]">
+            {service.includes.map((inc) => (
+              <li class="flex items-center space-x-2">
+                <span class="text-[var(--color-primary)]">✓</span>
+                <span>{inc}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {service?.possibleFeatures && service.possibleFeatures.length > 0 && (
+        <div class="space-y-2 col-span-1 md:col-span-2">
+          <span class="text-[10px] font-mono text-[var(--color-muted-soft)] uppercase tracking-wider block">POSSIBLE FEATURES:</span>
+          <ul class="flex flex-wrap gap-2 text-[12px] font-mono text-[var(--color-muted)]">
+            {service.possibleFeatures.map((feat) => (
+              <li class="px-3 py-1 rounded-full bg-[var(--color-canvas)] border border-[var(--color-hairline)] text-[var(--color-muted)]">
+                {feat}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  </article>
+)}

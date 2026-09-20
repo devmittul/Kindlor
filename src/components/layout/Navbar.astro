@@ -1,0 +1,132 @@
+---
+import { getWhatsAppUrl } from '../../lib/whatsapp';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+const whatsAppUrl = getWhatsAppUrl('general');
+---
+
+<header id="site-header" class="fixed top-0 left-0 w-full z-50 h-16 px-4 sm:px-8 lg:px-12 flex items-center justify-between transition-all duration-300 bg-[var(--color-canvas)] border-b border-[var(--color-hairline)]">
+  <!-- Brand Logo -->
+  <a aria-label="Kindlor Studio Home" class="flex items-center space-x-3 focus:outline-none" href={currentPath === '/' ? '#hero' : '/'}>
+    <div class="flex flex-col">
+      <span class="font-sans font-bold text-lg tracking-tight text-[var(--color-ink)]">KINDLOR</span>
+    </div>
+  </a>
+
+  <!-- Desktop Navigation Links -->
+  <nav aria-label="Main Navigation" class="hidden md:flex items-center space-x-8 lg:space-x-10 text-[14px] font-medium text-[var(--color-ink)]">
+    <a class={`hover:text-[var(--color-primary)] transition-colors duration-200 ${currentPath === '/' ? 'text-[var(--color-primary)]' : ''}`} href="/">Studio</a>
+    <a class={`hover:text-[var(--color-primary)] transition-colors duration-200 ${currentPath === '/services' ? 'text-[var(--color-primary)]' : ''}`} href="/services">Use Cases</a>
+    <a class={`hover:text-[var(--color-primary)] transition-colors duration-200 ${currentPath === '/work' ? 'text-[var(--color-primary)]' : ''}`} href="/work">Customers</a>
+    <a class={`hover:text-[var(--color-primary)] transition-colors duration-200 ${currentPath === '/about' ? 'text-[var(--color-primary)]' : ''}`} href="/about">About</a>
+  </nav>
+
+  <!-- Header Action Button & Mobile Toggle -->
+  <div class="flex items-center space-x-3 sm:space-x-4">
+    <a class="hidden sm:inline-flex items-center justify-center bg-[var(--color-primary)] text-[var(--color-on-primary)] font-semibold text-[14px] rounded-md px-5 h-10 hover:bg-[var(--color-primary-active)] transition-colors" href="https://wa.me/919468788874" rel="noopener noreferrer" target="_blank">
+      Connect with me
+    </a>
+
+    <!-- Mobile Navigation Toggle Button -->
+    <button
+      id="mobile-menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="mobile-menu-drawer"
+      aria-label="Toggle navigation menu"
+      class="md:hidden p-2 text-[var(--color-muted)] hover:text-[var(--color-ink)] focus:outline-none rounded-md border border-[var(--color-hairline)] bg-[var(--color-surface-card)]"
+    >
+      <svg id="hamburger-icon" class="w-5 h-5 block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+      <svg id="close-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Navigation Drawer Overlay -->
+<div
+  id="mobile-menu-drawer"
+  class="fixed inset-x-0 top-16 bottom-0 z-40 bg-[var(--color-canvas)] md:hidden transition-all duration-300 opacity-0 pointer-events-none overflow-y-auto px-6 py-8 flex flex-col justify-between"
+>
+  <nav aria-label="Mobile Navigation" class="flex flex-col space-y-6 text-lg font-bold text-[var(--color-muted)] pt-4">
+    <a class="mobile-nav-link text-[var(--color-ink)] hover:text-[var(--color-primary)] transition-colors pb-3 border-b border-[var(--color-hairline)]" href="/">
+      Studio
+    </a>
+    <a class="mobile-nav-link text-[var(--color-ink)] hover:text-[var(--color-primary)] transition-colors pb-3 border-b border-[var(--color-hairline)]" href="/services">
+      Use Cases
+    </a>
+    <a class="mobile-nav-link text-[var(--color-ink)] hover:text-[var(--color-primary)] transition-colors pb-3 border-b border-[var(--color-hairline)]" href="/work">
+      Customers
+    </a>
+    <a class="mobile-nav-link text-[var(--color-ink)] hover:text-[var(--color-primary)] transition-colors pb-3 border-b border-[var(--color-hairline)]" href="/about">
+      About
+    </a>
+  </nav>
+
+  <div class="pt-8 border-t border-[var(--color-hairline)] space-y-4">
+    <a class="w-full flex justify-center py-3 bg-[var(--color-primary)] text-[var(--color-on-primary)] rounded-md font-semibold text-[14px]" href="https://wa.me/919468788874" target="_blank" rel="noopener noreferrer">
+      Connect with me
+    </a>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.getElementById('mobile-menu-toggle');
+    const menuDrawer = document.getElementById('mobile-menu-drawer');
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    const closeIcon = document.getElementById('close-icon');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+    if (toggleBtn && menuDrawer && hamburgerIcon && closeIcon) {
+      let isOpen = false;
+
+      const openMenu = () => {
+        isOpen = true;
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        menuDrawer.classList.remove('opacity-0', 'pointer-events-none');
+        menuDrawer.classList.add('opacity-100', 'pointer-events-auto');
+        hamburgerIcon.classList.add('hidden');
+        closeIcon.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+      };
+
+      const closeMenu = () => {
+        isOpen = false;
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        menuDrawer.classList.remove('opacity-100', 'pointer-events-auto');
+        menuDrawer.classList.add('opacity-0', 'pointer-events-none');
+        hamburgerIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      };
+
+      toggleBtn.addEventListener('click', () => {
+        if (isOpen) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+
+      mobileLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          closeMenu();
+        });
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isOpen) {
+          closeMenu();
+        }
+      });
+    }
+  });
+</script>

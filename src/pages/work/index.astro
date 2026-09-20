@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeader from '../../components/ui/SectionHeader.astro';
+import ProjectCard from '../../components/ui/ProjectCard.astro';
+
+const allProjects = await getCollection('projects');
+const sortedProjects = allProjects.sort((a, b) => (a.data.order || 1) - (b.data.order || 1));
+---
+
+<BaseLayout
+  title="Web Design & Development Portfolio | Kindlor"
+  description="A selection of websites, applications and digital systems designed and developed by Kindlor Studio."
+  currentPath="/work"
+>
+  <div class="py-12 sm:py-24 px-4 sm:px-12 lg:px-24 max-w-6xl mx-auto space-y-12 sm:space-y-16">
+    <!-- Header -->
+    <header class="border-b border-[var(--color-hairline)] pb-6 sm:pb-8">
+      <SectionHeader
+        number="ARCHIVE"
+        eyebrow="SELECTED WORK & CASE STUDIES"
+        title="SELECTED WORK"
+        description="A selection of websites, applications and digital systems we've designed and developed. Every project explains the problem, the solution and the role the digital product plays in the business."
+      />
+    </header>
+
+    <!-- Case Study Cards Grid -->
+    <div class="space-y-10 sm:space-y-12">
+      {sortedProjects.map((project, idx) => (
+        <ProjectCard
+          project={project}
+          index={idx}
+          variant="full"
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>

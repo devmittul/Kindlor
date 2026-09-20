@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeader from '../../components/ui/SectionHeader.astro';
+import ServiceCard from '../../components/ui/ServiceCard.astro';
+import CTASection from '../../components/ui/CTASection.astro';
+import { DETAILED_SERVICES } from '../../data/servicesData';
+---
+
+<BaseLayout
+  title="Website Design & Business Automation Services | Kindlor"
+  description="Kindlor designs and develops modern business websites, booking systems, WhatsApp lead flows and custom automation systems."
+  currentPath="/services"
+>
+  <div class="py-12 sm:py-24 px-4 sm:px-12 lg:px-24 max-w-6xl mx-auto space-y-16 sm:space-y-24">
+    <!-- Header -->
+    <header class="border-b border-[var(--color-hairline)] pb-8 sm:pb-12">
+      <SectionHeader
+        eyebrow="SERVICES & SYSTEMS"
+        title="WE BUILD WEBSITES THAT DO MORE THAN LOOK GOOD."
+        description="Kindlor designs and develops modern business websites, booking systems, WhatsApp lead flows and custom automation systems for businesses that want a stronger digital presence. Every project starts with the business problem, not a template."
+      />
+    </header>
+
+    <!-- Detailed Services List -->
+    <div class="space-y-12 sm:space-y-16">
+      {DETAILED_SERVICES.map((svc) => (
+        <ServiceCard service={svc} variant="full" />
+      ))}
+    </div>
+
+    <!-- Final Services CTA -->
+    <CTASection
+      title="NOT SURE WHAT YOUR BUSINESS NEEDS?"
+      description="Tell us how your business currently works and where customers or internal processes get stuck. We will recommend the right digital approach."
+      buttonText="DISCUSS YOUR PROJECT"
+      buttonHref="https://wa.me/919468788874?text=Hi%2C%20I%27m%20interested%20in%20discussing%20my%20project%20with%20Kindlor%20Studio."
+    />
+  </div>
+</BaseLayout>

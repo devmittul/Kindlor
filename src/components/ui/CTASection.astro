@@ -1,0 +1,52 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  buttonText: string;
+  buttonHref: string;
+  secondaryButtonText?: string;
+  secondaryButtonHref?: string;
+  class?: string;
+}
+
+const {
+  title,
+  description,
+  buttonText,
+  buttonHref,
+  secondaryButtonText,
+  secondaryButtonHref,
+  class: className = '',
+} = Astro.props;
+---
+
+<section class={`py-24 px-4 sm:px-8 lg:px-12 bg-[var(--color-canvas)] relative overflow-hidden ${className}`}>
+  <div class="max-w-[1280px] mx-auto">
+    <div class="bg-[var(--color-primary)] text-[var(--color-on-primary)] rounded-xl p-12 sm:p-16 lg:px-24 flex flex-col md:flex-row items-center justify-between gap-12">
+      <div class="flex-1 space-y-4 text-center md:text-left">
+        <h2 class="text-[32px] md:text-[40px] font-sans font-bold tracking-tighter text-[var(--color-on-primary)] leading-tight">
+          {title}
+        </h2>
+        {description && (
+          <p class="text-[16px] md:text-[18px] font-sans text-[var(--color-on-primary)]/80 font-medium max-w-xl mx-auto md:mx-0">
+            {description}
+          </p>
+        )}
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center gap-4 shrink-0">
+        <a class="px-8 py-4 bg-[var(--color-on-primary)] text-[var(--color-primary)] font-sans text-[14px] font-semibold rounded-md hover:bg-[#1a1a1a] transition-colors flex items-center space-x-2" href={buttonHref} target={buttonHref.startsWith('http') ? '_blank' : '_self'} rel={buttonHref.startsWith('http') ? 'noopener noreferrer' : ''}>
+          <span>{buttonText}</span>
+          <span>→</span>
+        </a>
+
+        {secondaryButtonText && secondaryButtonHref && (
+          <a class="px-8 py-4 bg-transparent text-[var(--color-on-primary)] border border-[var(--color-on-primary)]/30 font-sans text-[14px] font-semibold rounded-md hover:bg-black/5 transition-colors flex items-center space-x-2" href={secondaryButtonHref} target={secondaryButtonHref.startsWith('http') ? '_blank' : '_self'} rel={secondaryButtonHref.startsWith('http') ? 'noopener noreferrer' : ''}>
+            <span>{secondaryButtonText}</span>
+            <span>→</span>
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

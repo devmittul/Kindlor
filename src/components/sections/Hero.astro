@@ -1,0 +1,73 @@
+---
+---
+<section class="relative min-h-[85vh] py-24 px-4 sm:px-8 lg:px-12 flex items-center bg-[var(--color-canvas)]" id="hero">
+  <div class="max-w-[1280px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+    
+    <!-- Left Column: Content (7 cols) -->
+    <div class="lg:col-span-7 space-y-8">
+      <!-- Eyebrow -->
+      <div>
+        <span class="inline-block px-3 py-1 rounded-full bg-[var(--color-primary)] text-[var(--color-on-primary)] text-[12px] font-sans font-bold uppercase tracking-[1.5px]">
+          KINDLOR DIGITAL
+        </span>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="text-[48px] sm:text-[56px] md:text-[72px] font-sans font-bold text-[var(--color-ink)] leading-[1.05] tracking-[-2.5px] max-w-3xl">
+        YOUR BUSINESS DESERVES MORE THAN AN INSTAGRAM PAGE.
+      </h1>
+
+      <!-- Supporting Copy -->
+      <p class="text-[16px] sm:text-[18px] text-[var(--color-body)] font-sans max-w-2xl leading-relaxed">
+        Your website is often the first place a potential customer checks before they call, visit, book or buy. Kindlor designs and builds modern business websites and digital systems that help people discover your business, understand what you offer, trust your brand and take action.
+      </p>
+
+      <!-- Buttons -->
+      <div class="flex flex-col sm:flex-row items-center gap-4 pt-4">
+        <a class="w-full sm:w-auto h-10 px-6 bg-[var(--color-primary)] text-[var(--color-on-primary)] font-sans text-[14px] font-semibold rounded-md hover:bg-[var(--color-primary-active)] transition-colors flex items-center justify-center space-x-2" href="https://wa.me/919468788874?text=Hi%2C%20I%27m%20interested%20in%20starting%20a%20project%20with%20Kindlor%20Studio." target="_blank" rel="noopener noreferrer">
+          <span>START YOUR PROJECT</span>
+          <span>→</span>
+        </a>
+        <a class="w-full sm:w-auto h-10 px-6 bg-[var(--color-surface-card)] text-[var(--color-on-dark)] border border-[var(--color-hairline)] font-sans text-[14px] font-semibold rounded-md hover:border-[var(--color-hairline-strong)] transition-colors flex items-center justify-center space-x-2" href="/work">
+          <span>SEE OUR WORK</span>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Right Column: Code Mockup (5 cols) -->
+    <div class="lg:col-span-5 hidden lg:block">
+      <div class="bg-[var(--color-surface-card)] rounded-xl border border-[var(--color-hairline)] p-6 relative">
+        <!-- Mockup Header -->
+        <div class="flex items-center space-x-2 mb-4 border-b border-[var(--color-hairline-strong)] pb-4">
+          <div class="flex space-x-1.5">
+            <div class="w-3 h-3 rounded-full bg-[var(--color-hairline-strong)]"></div>
+            <div class="w-3 h-3 rounded-full bg-[var(--color-hairline-strong)]"></div>
+            <div class="w-3 h-3 rounded-full bg-[var(--color-hairline-strong)]"></div>
+          </div>
+          <span class="text-[12px] font-mono text-[var(--color-muted-soft)] ml-2">kindlor.config.ts</span>
+        </div>
+        
+        <!-- Code Content -->
+        <pre is:raw class="font-mono text-[14px] text-[var(--color-body)] leading-[1.55] overflow-x-auto">
+<span class="text-[var(--color-accent-blue)]">import</span> { createSystem } <span class="text-[var(--color-accent-blue)]">from</span> <span class="text-[var(--color-accent-emerald)]">'@kindlor/core'</span>;
+
+<span class="text-[var(--color-accent-blue)]">export default</span> createSystem({
+  <span class="text-[var(--color-ink)]">client:</span> <span class="text-[var(--color-accent-emerald)]">'Your Business'</span>,
+  <span class="text-[var(--color-ink)]">goals:</span> [
+    <span class="text-[var(--color-accent-emerald)]">'Increase conversions'</span>,
+    <span class="text-[var(--color-accent-emerald)]">'Automate bookings'</span>,
+    <span class="text-[var(--color-accent-emerald)]">'Build trust'</span>
+  ],
+  <span class="text-[var(--color-ink)]">features:</span> {
+    <span class="text-[var(--color-ink)]">performance:</span> <span class="text-[#f59e0b]">true</span>,
+    <span class="text-[var(--color-ink)]">seo:</span> <span class="text-[#f59e0b]">true</span>,
+    <span class="text-[var(--color-ink)]">customDesign:</span> <span class="text-[#f59e0b]">true</span>
+  },
+  <span class="text-[var(--color-ink)]">status:</span> <span class="text-[var(--color-accent-emerald)]">'Ready to deploy'</span>
+});
+        </pre>
+      </div>
+    </div>
+  </div>
+</section>

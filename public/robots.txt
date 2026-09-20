@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kindlor.com/sitemap-index.xml

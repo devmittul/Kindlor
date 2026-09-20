@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeader from '../../components/ui/SectionHeader.astro';
+import FounderCard from '../../components/ui/FounderCard.astro';
+import { ContactForm } from '../../components/react/ContactForm';
+import { PROCESS_STEPS } from '../../lib/constants';
+import { FOUNDERS } from '../../data/foundersData';
+import { getWhatsAppUrl } from '../../lib/whatsapp';
+
+const whatsAppUrl = getWhatsAppUrl('general');
+---
+
+<BaseLayout
+  title="The Studio | Kindlor Web Design & Automation"
+  description="Kindlor is a digital studio founded by Mittul and Arshmeen. We combine design, engineering and automation to build websites and digital systems."
+  currentPath="/about"
+>
+  <div class="py-12 sm:py-24 px-4 sm:px-12 lg:px-24 max-w-6xl mx-auto space-y-16 sm:space-y-24">
+    <!-- Header -->
+    <header class="border-b border-[var(--color-hairline)] pb-8 sm:pb-12">
+      <SectionHeader
+        eyebrow="THE STUDIO / FOUNDERS & ETHOS"
+        title="TWO FOUNDERS. ONE DIGITAL STUDIO."
+        description="Kindlor is a digital studio founded by Mittul and Arshmeen. We combine design, engineering and automation to build websites and digital systems for businesses that want a stronger presence online."
+      />
+    </header>
+
+    <!-- Founders Grid -->
+    <section class="space-y-8">
+      <div class="text-xs font-mono text-[#5b5b68] tracking-widest uppercase border-b border-[var(--color-hairline)] pb-3">
+        LEADERSHIP & DISCIPLINES
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {FOUNDERS.map((founder) => (
+          <FounderCard founder={founder} />
+        ))}
+      </div>
+    </section>
+
+    <!-- Design + Engineering Section -->
+    <section class="bg-[var(--color-surface-card)] p-8 sm:p-12 rounded-xl border border-[var(--color-hairline)] space-y-6">
+      <SectionHeader
+        eyebrow="PHILOSOPHY"
+        title="THE DESIGN IS WHAT PEOPLE SEE. THE SYSTEM IS WHAT MAKES IT WORK."
+        description="At Kindlor, both design and engineering disciplines work together from the very beginning of a project. Instead of treating design and development as disconnected, sequential handoffs, we design with technical constraints in mind and engineer with uncompromising aesthetic rigor."
+      />
+    </section>
+
+    <!-- Process Section -->
+    <section class="space-y-8">
+      <SectionHeader
+        eyebrow="WORKFLOW"
+        title="OUR 6-STEP METHODOLOGY"
+      />
+      <div class="flex overflow-x-auto snap-x snap-mandatory pb-6 gap-6 md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        {PROCESS_STEPS.map((step) => (
+          <div class="snap-start shrink-0 w-[85vw] md:w-auto bg-[var(--color-surface-card)] p-6 rounded-xl border border-[var(--color-hairline)] space-y-3">
+            <div class="text-xs font-mono text-[var(--color-primary)] font-bold">{step.number} // STAGE</div>
+            <h3 class="text-xl font-sans font-bold text-[var(--color-ink)] uppercase">{step.title}</h3>
+            <p class="text-xs sm:text-sm text-[var(--color-body)] font-sans font-light leading-relaxed">{step.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="space-y-10 pt-8 border-t border-[var(--color-hairline)]" id="contact">
+      <SectionHeader
+        number="CONTACT"
+        eyebrow="START A PROJECT"
+        title="LET'S BUILD SOMETHING YOUR CUSTOMERS CAN FIND, UNDERSTAND AND TRUST."
+        description="Tell us about your business, what you currently have online and what you want to improve. We will review the requirement and discuss the right approach."
+      />
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <!-- Direct Details -->
+        <div class="lg:col-span-4 space-y-6 text-xs font-mono">
+          <div class="p-6 bg-[var(--color-surface-card)] border border-[var(--color-hairline)] rounded-xl space-y-6">
+            <div>
+              <div class="text-[10px] tracking-widest uppercase text-[var(--color-muted-soft)] mb-1">Direct Electronic Mail</div>
+              <a class="text-[var(--color-ink)] hover:text-[var(--color-primary)] transition-colors text-sm font-sans break-all" href="mailto:hello@kindlor.com">
+                hello@kindlor.com
+              </a>
+            </div>
+            <div>
+              <div class="text-[10px] tracking-widest uppercase text-[var(--color-muted-soft)] mb-1">WhatsApp & Direct Line</div>
+              <div class="space-y-2">
+                <a class="text-[var(--color-ink)] hover:text-[var(--color-primary)] transition-colors text-sm font-sans block" href="tel:+919468788874">
+                  +91 9468788874
+                </a>
+                <a class="text-[var(--color-primary)] hover:text-[var(--color-primary-active)] transition-colors text-xs font-mono break-all flex items-center space-x-2" href={whatsAppUrl} target="_blank" rel="noopener noreferrer">
+                  <span>CHAT ON WHATSAPP ↗</span>
+                </a>
+              </div>
+            </div>
+            <div>
+              <div class="text-[10px] tracking-widest uppercase text-[var(--color-muted-soft)] mb-1">Client Scope</div>
+              <p class="text-[var(--color-body)] leading-relaxed">
+                Working with businesses in India &amp; internationally.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-8">
+          <ContactForm client:load />
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

@@ -1,0 +1,49 @@
+---
+import SectionHeader from '../ui/SectionHeader.astro';
+import ServiceCard from '../ui/ServiceCard.astro';
+import { SERVICE_PREVIEW_CATEGORIES, TARGET_INDUSTRIES } from '../../data/homeData';
+---
+
+<section class="py-24 px-4 sm:px-8 lg:px-12 border-b border-[var(--color-hairline)] bg-[var(--color-canvas)]" id="service-preview">
+  <div class="max-w-[1280px] mx-auto space-y-12">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[var(--color-hairline-strong)] pb-6">
+      <SectionHeader
+        number="02"
+        eyebrow="CAPABILITIES"
+        title="FOUR MAJOR DIGITAL CAPABILITIES"
+      />
+      <a class="text-[14px] font-sans font-semibold text-[var(--color-ink)] hover:text-[var(--color-primary)] transition-colors flex items-center space-x-2 shrink-0" href="/services">
+        <span>VIEW ALL SERVICES</span>
+        <span>→</span>
+      </a>
+    </div>
+
+    <div class="flex overflow-x-auto snap-x snap-mandatory pb-6 gap-6 md:grid md:grid-cols-2 md:overflow-visible [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+      {SERVICE_PREVIEW_CATEGORIES.map((cat, idx) => (
+        <ServiceCard
+          number={(idx + 1).toString()}
+          title={cat.title}
+          description={cat.description}
+          icon={cat.icon}
+          variant="preview"
+          class="snap-start shrink-0 w-[85vw] md:w-auto"
+        />
+      ))}
+    </div>
+    
+    <div class="pt-8 mt-8 border-t border-[var(--color-hairline)]">
+      <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+        <span class="text-[12px] font-mono font-bold text-[var(--color-muted-soft)] uppercase tracking-widest shrink-0">
+          SYSTEMS BUILT FOR:
+        </span>
+        <div class="flex flex-wrap gap-2">
+          {TARGET_INDUSTRIES.map((ind) => (
+            <span class="text-[12px] font-sans px-3 py-1 rounded-full bg-[var(--color-surface-card)] border border-[var(--color-hairline)] text-[var(--color-muted)]">
+              {ind}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
