@@ -15,7 +15,6 @@
     "@astrojs/mdx": "^4.0.0",
     "@astrojs/react": "^4.0.0",
     "@astrojs/sitemap": "^3.7.4",
-    "@astrojs/vercel": "^8.2.11",
     "@fontsource/ibm-plex-mono": "^5.1.0",
     "@fontsource/manrope": "^5.1.0",
     "@tailwindcss/vite": "^4.0.0",
