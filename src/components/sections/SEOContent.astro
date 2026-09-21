@@ -112,7 +112,7 @@ import SectionHeader from '../ui/SectionHeader.astro';
 
     if (btn && wrapper) {
       // Remove old listeners to prevent duplicates on navigation
-      const newBtn = btn.cloneNode(true);
+      const newBtn = btn.cloneNode(true) as HTMLElement;
       btn.parentNode?.replaceChild(newBtn, btn);
       
       newBtn.addEventListener('click', () => {
