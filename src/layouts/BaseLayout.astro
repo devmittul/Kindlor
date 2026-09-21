@@ -20,6 +20,7 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || SITE_METADATA.url);
+const imageURL = new URL(image, Astro.site || SITE_METADATA.url).href;
 
 // Schema.org Structured Data
 const organizationSchema = {
@@ -92,7 +93,7 @@ const breadcrumbSchema = currentPath !== '/' ? {
     <meta property="og:locale" content="en_US" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
+    <meta property="og:image" content={imageURL} />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
@@ -101,7 +102,7 @@ const breadcrumbSchema = currentPath !== '/' ? {
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={image} />
+    <meta property="twitter:image" content={imageURL} />
 
     <!-- Google Fonts: Inter & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
